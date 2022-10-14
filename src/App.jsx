@@ -10,27 +10,32 @@ function App() {
 
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
-  const API_KEY = "563492ad6f917000010000015d84a234b8844671bd5d860647642ee7";
-  const endpoint = `https://api.pexels.com/v1/search?query=people&page=${page}`;
 
   const getDataApi = async () => {
-    const response = await fetch(endpoint, {
-      headers: {
-        Authorization: API_KEY
-      }
-    });
 
-    let { photos } = await response.json();
-    photos = photos.map(item => {
+    const Api = { 
+      base: import.meta.env.VITE_BASE_URL, 
+      key: import.meta.env.VITE_KEY 
+    }; 
+
+    try {
+      const response = await fetch(Api.base.concat(`search?query=people&page=${page}`), {
+        headers: {
+          Authorization: Api.key
+      }});  
+      let { photos } = await response.json();
+      photos = photos.map(item => {
       return {
         id: item.id,
         src: item.src,
         alt: item.alt,
-        liked: item.liked
-      }
+        liked: item.liked}
     })
     setPhotos(photos)
-  }
+    } catch(err){
+      console.log(err.message)
+    }
+    };
 
   useEffect(() => {
     getDataApi();
