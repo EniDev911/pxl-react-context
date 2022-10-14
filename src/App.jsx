@@ -20,11 +20,12 @@ function App() {
     };
 
     try {
-      const response = await fetch(Api.base.concat(Api.query, `&page=${page}`), {
+      const response = await fetch(Api.base + Api.query + "&page=" + page, {
         headers: {
           Authorization: Api.key
         }
       });
+
       if (response.status === 429) {
         return alert("Se han hecho demasiadas peticiones en un plazo muy corto");
       }
