@@ -14,7 +14,7 @@ const Favoritos = () => {
 
     return (
         <Container>
-            <Row>
+            <Row gap={4}>
                 {photos.filter(photo => (
                     photo.liked
                 )).map(photo => (

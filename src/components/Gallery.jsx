@@ -16,12 +16,13 @@ const Gallery = () => {
     <Container>
       <Row>
         {photos.map(photo => (
-          <Col key={photo.id} xs={8} md={4} lg={3} className="mb-3 mx-auto">
+          <Col key={photo.id} xs={10} md={6} lg={4} xl={3} className="mb-3 mx-auto">
             <Card bg="dark" className="position-relative" onClick={() => {
               setFavorito(photo.id);
             }}>
               <Card.Img variant="top" src={photo.src.tiny} />
               <Heart filled={photo.liked} />
+              <Card.Text className="position-absolute text-light bottom-0 text-center w-100">{photo.alt}</Card.Text>
             </Card>
           </Col>
         ))}
