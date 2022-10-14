@@ -4,13 +4,8 @@ import context from "../my_context";
 import Heart from './Heart';
 
 const Gallery = () => {
-  const { photos, setPhotos } = useContext(context);
+  const { photos, setPhotos, setFavoritos } = useContext(context);
 
-  const setFavorito = (id) => {
-    const fotoIndex = photos.findIndex((photo) => photo.id === id);
-    photos[fotoIndex].liked = !photos[fotoIndex].liked;
-    setPhotos([...photos]);
-  };
 
   return (
     <Container>
@@ -18,7 +13,7 @@ const Gallery = () => {
         {photos.map(photo => (
           <Col key={photo.id} xs={10} md={6} lg={4} xl={3} className="mb-3 mx-auto">
             <Card bg="dark" className="position-relative" onClick={() => {
-              setFavorito(photo.id);
+              setFavoritos(photo.id);
             }}>
               <Card.Img variant="top" src={photo.src.tiny} />
               <Heart filled={photo.liked} />
